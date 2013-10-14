@@ -2,7 +2,6 @@
 <resources>
 
     <string name="blog_name">エキサイトブログ向上委員会</string>
-    <string name="blog_url">http://staff.exblog.jp</string>
     <string name="feed_url">http://staff.exblog.jp/index.xml</string>
     <string name="action_settings">Settings</string>
 
