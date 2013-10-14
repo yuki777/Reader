@@ -37,19 +37,19 @@ public class AppListFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		//        PackageManager packageManager = getActivity().getPackageManager();
-		//        List<PackageInfo> packageInfoList = packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES);
-		List entries = new ArrayList();
-		entries.add("1foo");
-		entries.add("2bar");
-		entries.add("3bar");
-		entries.add("4bar");
-		entries.add("5bar");
-		entries.add("6bar");
-		entries.add("7bar");
-		entries.add("8bar");
-		entries.add("9bar");
-		entries.add("10bar");
+//		//        PackageManager packageManager = getActivity().getPackageManager();
+//		//        List<PackageInfo> packageInfoList = packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES);
+//		List entries = new ArrayList();
+//		entries.add("1foo");
+//		entries.add("2bar");
+//		entries.add("3bar");
+//		entries.add("4bar");
+//		entries.add("5bar");
+//		entries.add("6bar");
+//		entries.add("7bar");
+//		entries.add("8bar");
+//		entries.add("9bar");
+//		entries.add("10bar");
 
 		String url = "http://staff.exblog.jp/index.xml";
 		String title = "エキサイトブログ向上委員会";
