@@ -31,69 +31,22 @@ import com.xxxlabo.reader.RSS20Parser.Entry;
 
 public class AppListFragment extends ListFragment {
 
-
-
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-//		//        PackageManager packageManager = getActivity().getPackageManager();
-//		//        List<PackageInfo> packageInfoList = packageManager.getInstalledPackages(PackageManager.GET_ACTIVITIES);
-//		List entries = new ArrayList();
-//		entries.add("1foo");
-//		entries.add("2bar");
-//		entries.add("3bar");
-//		entries.add("4bar");
-//		entries.add("5bar");
-//		entries.add("6bar");
-//		entries.add("7bar");
-//		entries.add("8bar");
-//		entries.add("9bar");
-//		entries.add("10bar");
-
 		String url = "http://staff.exblog.jp/index.xml";
 		String title = "エキサイトブログ向上委員会";
 		new DownloadXmlTask().execute(url);
-
-
-		//		CardListAdapter adapter = new CardListAdapter(getActivity());
-		//		//        if (packageInfoList != null) {
-		//		//            for (PackageInfo info : packageInfoList) {
-		//		//                adapter.add(info);
-		//		//            }
-		//		//        }
-		//		int size = entries.size();
-		//		for(int i=0; i<size; i++){
-		//			adapter.add(entries.get(i));
-		//		}
-		//
-		//
-		//
-		//		int padding = (int) (getResources().getDisplayMetrics().density * 8); // 8dip
-		//		ListView listView = getListView();
-		//		listView.setPadding(padding, 0, padding, 0);
-		//		listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
-		//		listView.setDivider(null);
-		//
-		//		LayoutInflater inflater = LayoutInflater.from(getActivity());
-		//		View header = inflater.inflate(R.layout.list_header_footer, listView, false);
-		//		View footer = inflater.inflate(R.layout.list_header_footer, listView, false);
-		//		listView.addHeaderView(header, null, false);
-		//		listView.addFooterView(footer, null, false);
-		//
-		//		setListAdapter(adapter);
 	}
 
-	//public class CardListAdapter extends ArrayAdapter<PackageInfo> {
 	public class CardListAdapter extends ArrayAdapter {
 
 		LayoutInflater mInflater;
-		//PackageManager packageManager;
 
 		public CardListAdapter(Context context) {
 			super(context, 0);
 			mInflater = LayoutInflater.from(context);
-			//packageManager = context.getPackageManager();
 		}
 
 		@Override
@@ -101,24 +54,21 @@ public class AppListFragment extends ListFragment {
 			if (convertView == null) {
 				convertView = mInflater.inflate(R.layout.list_item_card, parent, false);
 			}
-			Log.w("test", "" + position);
-			Log.w("test", "" + getItem(position));
-			//            PackageInfo info = getItem(position);
-			//Log.w("test", (String)getItem(position));
+			
+			List entries = (List) getItem(position);
+			String title = (String) entries.get(0);
+			String desc = (String) entries.get(1);
+			String url = (String) entries.get(2);
 
-			//            TextView tv = (TextView) convertView.findViewById(R.id.title);
-			//            tv.setText(info.applicationInfo.loadLabel(packageManager));
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
-			tv.setText("" + getItem(position));
+			tv.setText(title);
 
-			//            tv = (TextView) convertView.findViewById(R.id.sub);
-			//            tv.setText(info.packageName + "\n" + "versionName : " + info.versionName + "\nversionCode : " + info.versionCode);
 			tv = (TextView) convertView.findViewById(R.id.sub);
-			tv.setText("ほげほげ\nふがふがふがふが。。。\nfoooooooooooobaraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+			desc = desc.substring(0, 100) + " ... ";
+			tv.setText(desc);
 
 			//            ImageView iv = (ImageView) convertView.findViewById(R.id.icon);
 			//            iv.setImageDrawable(info.applicationInfo.loadIcon(packageManager));
-
 
 			return convertView;
 		}
@@ -146,24 +96,22 @@ public class AppListFragment extends ListFragment {
 		@Override
 		protected void onPostExecute(List result) {
 
-			List entries = new ArrayList();
-			entries.add("1foo");
-			entries.add("2bar");
-			entries.add("3bar");
 
 			CardListAdapter adapter = new CardListAdapter(getActivity());
-			
 			int size = result.size();
 			for(int i=0; i<size; i++){
 				Entry entry = (Entry)result.get(i);
 				final String title = entry.title;
 				final String desc  = Html.fromHtml(entry.description).toString();
 				final String url   = entry.link;
-				Log.w("onpost", title);
-				adapter.add(title);
+				
+				List entries = new ArrayList();
+				entries.add(title);
+				entries.add(desc);
+				entries.add(url);
+
+				adapter.add(entries);
 			}
-
-
 
 			int padding = (int) (getResources().getDisplayMetrics().density * 8); // 8dip
 			ListView listView = getListView();
@@ -178,9 +126,6 @@ public class AppListFragment extends ListFragment {
 			listView.addFooterView(footer, null, false);
 
 			setListAdapter(adapter);
-
-
-
 		}
 
 
@@ -218,8 +163,5 @@ public class AppListFragment extends ListFragment {
 			conn.connect();
 			return conn.getInputStream();
 		}
-	}
-
-
-}
-
+	} // private class DownloadXmlTask extends AsyncTask<String, Void, List>
+} // public class AppListFragment extends ListFragment
