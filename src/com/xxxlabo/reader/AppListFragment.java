@@ -35,8 +35,9 @@ public class AppListFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		String url = "http://staff.exblog.jp/index.xml";
-		String title = "エキサイトブログ向上委員会";
+		String title = getString(R.string.blog_name);
+		String url = getString(R.string.feed_url);
+		
 		new DownloadXmlTask().execute(url);
 	}
 
@@ -67,8 +68,8 @@ public class AppListFragment extends ListFragment {
 			desc = desc.substring(0, 100) + " ... ";
 			tv.setText(desc);
 
-			//            ImageView iv = (ImageView) convertView.findViewById(R.id.icon);
-			//            iv.setImageDrawable(info.applicationInfo.loadIcon(packageManager));
+//            ImageView iv = (ImageView) convertView.findViewById(R.id.icon);
+//            iv.setImageDrawable(info.applicationInfo.loadIcon(packageManager));
 
 			return convertView;
 		}
