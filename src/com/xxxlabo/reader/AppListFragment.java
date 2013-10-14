@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -13,10 +14,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,7 +41,7 @@ public class AppListFragment extends ListFragment {
 
 		String title = getString(R.string.blog_name);
 		String url = getString(R.string.feed_url);
-		
+
 		new DownloadXmlTask().execute(url);
 	}
 
@@ -55,7 +59,7 @@ public class AppListFragment extends ListFragment {
 			if (convertView == null) {
 				convertView = mInflater.inflate(R.layout.list_item_card, parent, false);
 			}
-			
+
 			List entries = (List) getItem(position);
 			String title = (String) entries.get(0);
 			String desc = (String) entries.get(1);
@@ -64,12 +68,15 @@ public class AppListFragment extends ListFragment {
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
 			tv.setText(title);
 
+			tv = (TextView) convertView.findViewById(R.id.url);
+			tv.setText(url);
+
 			tv = (TextView) convertView.findViewById(R.id.sub);
 			desc = desc.substring(0, 100) + " ... ";
 			tv.setText(desc);
 
-//            ImageView iv = (ImageView) convertView.findViewById(R.id.icon);
-//            iv.setImageDrawable(info.applicationInfo.loadIcon(packageManager));
+			//            ImageView iv = (ImageView) convertView.findViewById(R.id.icon);
+			//            iv.setImageDrawable(info.applicationInfo.loadIcon(packageManager));
 
 			return convertView;
 		}
@@ -105,7 +112,7 @@ public class AppListFragment extends ListFragment {
 				final String title = entry.title;
 				final String desc  = Html.fromHtml(entry.description).toString();
 				final String url   = entry.link;
-				
+
 				List entries = new ArrayList();
 				entries.add(title);
 				entries.add(desc);
@@ -126,6 +133,23 @@ public class AppListFragment extends ListFragment {
 			listView.addHeaderView(header, null, false);
 			listView.addFooterView(footer, null, false);
 
+			listView.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//					// open webview in new browser 
+//                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+//                    startActivity(browserIntent);
+					
+                    // open webview in app 
+                    Intent intent = new Intent(view.getContext(), DetailActivity.class);
+                    String title = ((TextView) view.findViewById(R.id.title)).getText().toString();
+                    String url = ((TextView) view.findViewById(R.id.url)).getText().toString();
+                    intent.putExtra("title", title);
+                    intent.putExtra("url", url);
+                    view.getContext().startActivity(intent);
+				}
+			});
+			
 			setListAdapter(adapter);
 		}
 
