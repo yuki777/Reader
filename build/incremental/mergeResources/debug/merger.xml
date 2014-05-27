@@ -64,9 +64,9 @@
             <file
                 path="/Users/yuki/src/reader-base/res/values/strings.xml"
                 qualifiers="" >
-                <string name="action_settings" >Settings
-                </string>
                 <string name="blog_name" >エキサイトブログ向上委員会
+                </string>
+                <string name="action_settings" >Settings
                 </string>
                 <string name="feed_url" >http://staff.exblog.jp/index.xml
                 </string>
