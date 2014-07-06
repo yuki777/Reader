@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger>
+<merger version="2" >
 
     <dataSet config="main" >
         <source path="/Users/yuki/src/reader-base/res" >
             <file
                 name="ic_launcher"
                 path="/Users/yuki/src/reader-base/res/drawable-hdpi/ic_launcher.png"
-                qualifiers="hdpi"
+                qualifiers="hdpi-v4"
                 type="drawable" />
             <file
                 name="ic_launcher"
                 path="/Users/yuki/src/reader-base/res/drawable-mdpi/ic_launcher.png"
-                qualifiers="mdpi"
+                qualifiers="mdpi-v4"
                 type="drawable" />
             <file
                 name="ic_launcher"
                 path="/Users/yuki/src/reader-base/res/drawable-xhdpi/ic_launcher.png"
-                qualifiers="xhdpi"
+                qualifiers="xhdpi-v4"
                 type="drawable" />
             <file
                 name="ic_launcher"
                 path="/Users/yuki/src/reader-base/res/drawable-xxhdpi/ic_launcher.png"
-                qualifiers="xxhdpi"
+                qualifiers="xxhdpi-v4"
                 type="drawable" />
             <file
                 name="activity_main"
@@ -64,11 +64,11 @@
             <file
                 path="/Users/yuki/src/reader-base/res/values/strings.xml"
                 qualifiers="" >
-                <string name="blog_name" >エキサイトブログ向上委員会
+                <string name="blog_name" >エキサイトメール・オフィシャルブログ
                 </string>
                 <string name="action_settings" >Settings
                 </string>
-                <string name="feed_url" >http://staff.exblog.jp/index.xml
+                <string name="feed_url" >http://exfreemail.exblog.jp/index.xml
                 </string>
             </file>
             <file
@@ -88,7 +88,7 @@
             </file>
             <file
                 path="/Users/yuki/src/reader-base/res/values-sw720dp-land/dimens.xml"
-                qualifiers="sw720dp-land" >
+                qualifiers="sw720dp-land-v13" >
                 <dimen name="activity_horizontal_margin" >128dp
                 </dimen>
             </file>
@@ -115,8 +115,8 @@
                 </style>
             </file>
         </source>
-        <source path="/Users/yuki/src/reader-base/build/res/rs/debug" />
-        <source path="/Users/yuki/src/reader-base/build/res/generated/debug" />
+        <source path="/Users/yuki/src/reader-base/build/generated/res/rs/debug" />
+        <source path="/Users/yuki/src/reader-base/build/generated/res/generated/debug" />
     </dataSet>
     <dataSet config="debug" >
         <source path="/Users/yuki/src/reader-base/build-types/debug/res" />
