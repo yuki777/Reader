@@ -27,11 +27,16 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import com.xxxlabo.reader.RSS20Parser.Entry;
+
 
 public class AppListFragment extends ListFragment {
 
@@ -72,7 +77,13 @@ public class AppListFragment extends ListFragment {
 			tv.setText(url);
 
 			tv = (TextView) convertView.findViewById(R.id.sub);
-			desc = desc.substring(0, 100) + " ... ";
+            desc = desc.replaceAll("\r\n|\r|\n", "");
+            desc = stripTags(desc, "someTag");
+            //android.util.Log.i("tagFoo",  "after  : " + desc.length());
+
+            if(desc.length() >= 100){
+                desc = desc.substring(0, 100) + " ... ";
+            }
 			tv.setText(desc);
 
 			//            ImageView iv = (ImageView) convertView.findViewById(R.id.icon);
@@ -80,7 +91,38 @@ public class AppListFragment extends ListFragment {
 
 			return convertView;
 		}
-	}
+
+        public String stripTags(String text, String allowedTags) {
+            String[] tag_list = allowedTags.split(",");
+            Arrays.sort(tag_list);
+
+            final Pattern p = Pattern.compile("<[/!]?([^\\\\s>]*)\\\\s*[^>]*>",
+                    Pattern.CASE_INSENSITIVE);
+            Matcher m = p.matcher(text);
+
+            StringBuffer out = new StringBuffer();
+            int lastPos = 0;
+            while (m.find()) {
+                String tag = m.group(1);
+                // if tag not allowed: skip it
+                if (Arrays.binarySearch(tag_list, tag) < 0) {
+                    out.append(text.substring(lastPos, m.start())).append(" ");
+
+                } else {
+                    out.append(text.substring(lastPos, m.end()));
+                }
+                lastPos = m.end();
+            }
+            if (lastPos > 0) {
+                out.append(text.substring(lastPos));
+                return out.toString().trim();
+            } else {
+                return text;
+            }
+        }
+
+
+    }
 
 
 	// Implementation of AsyncTask used to download XML feed from stackoverflow.com.
@@ -109,9 +151,9 @@ public class AppListFragment extends ListFragment {
 			int size = result.size();
 			for(int i=0; i<size; i++){
 				Entry entry = (Entry)result.get(i);
-				final String title = entry.title;
-				final String desc  = Html.fromHtml(entry.description).toString();
-				final String url   = entry.link;
+				final String title = getTitleByEntry(entry);
+                final String desc  = getDescriptionByEntry(entry);
+				final String url   = getUrlByEntry(entry);
 
 				List entries = new ArrayList();
 				entries.add(title);
@@ -189,4 +231,29 @@ public class AppListFragment extends ListFragment {
 			return conn.getInputStream();
 		}
 	} // private class DownloadXmlTask extends AsyncTask<String, Void, List>
+
+    private String getTitleByEntry(Entry entry) {
+        try {
+            return entry.title;
+        } catch (Exception e) {
+            return "(No Title)";
+        }
+    }
+
+    private String getDescriptionByEntry(Entry entry) {
+        try {
+            return Html.fromHtml(entry.description.toString()).toString();
+        } catch (Exception e) {
+            return "(No Description)";
+        }
+    }
+
+    private String getUrlByEntry(Entry entry) {
+        try {
+            return entry.link;
+        } catch (Exception e) {
+            // TODO:
+            return "(No URL)";
+        }
+    }
 } // public class AppListFragment extends ListFragment
