@@ -64,11 +64,11 @@
             <file
                 path="/Users/yuki/src/reader-base/res/values/strings.xml"
                 qualifiers="" >
-                <string name="blog_name" >エキサイトメール・オフィシャルブログ
+                <string name="blog_name" >test中。。。
                 </string>
                 <string name="action_settings" >Settings
                 </string>
-                <string name="feed_url" >http://exfreemail.exblog.jp/index.xml
+                <string name="feed_url" >http://xxxlabo.com/feed/yuki777.tumblr.com/rss
                 </string>
             </file>
             <file
