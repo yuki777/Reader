@@ -15,7 +15,8 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/icon" />
+            android:textSize="20sp"
+            />
 
         <TextView
             android:id="@+id/url"
@@ -30,9 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
             android:layout_marginTop="4dip"
-            android:layout_toLeftOf="@+id/icon"
             android:textColor="#999999"
-            android:textSize="12sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/pubDate"
@@ -40,25 +40,24 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/desc"
             android:layout_marginTop="1dip"
-            android:layout_toLeftOf="@+id/icon"
             android:textColor="#999999"
             android:textSize="12sp" />
 
-        <TextView
-            android:id="@+id/guid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/pubDate"
-            android:layout_marginTop="1dip"
-            android:layout_toLeftOf="@+id/icon"
-            android:textColor="#999999"
-            android:textSize="12sp" />
+        <!--<TextView-->
+            <!--android:id="@+id/guid"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/pubDate"-->
+            <!--android:layout_marginTop="1dip"-->
+            <!--android:textColor="#999999"-->
+            <!--android:textSize="12sp" />-->
 
-        <ImageView
-            android:id="@+id/icon"
-            android:layout_width="48dip"
-            android:layout_height="48dip"
-            android:layout_alignParentRight="true" />
+        <!--<ImageView-->
+            <!--android:id="@+id/icon"-->
+            <!--android:layout_width="48dip"-->
+            <!--android:layout_height="48dip"-->
+            <!--android:layout_alignParentRight="true" />-->
+
     </RelativeLayout>
 
     <View

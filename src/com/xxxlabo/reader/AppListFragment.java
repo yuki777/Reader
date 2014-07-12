@@ -84,9 +84,9 @@ public class AppListFragment extends ListFragment {
             tv = (TextView) convertView.findViewById(R.id.pubDate);
             tv.setText(pubDate);
 
-            //guid
-            tv = (TextView) convertView.findViewById(R.id.guid);
-            tv.setText(guid);
+//            //guid
+//            tv = (TextView) convertView.findViewById(R.id.guid);
+//            tv.setText(guid);
 
             // desc
             tv = (TextView) convertView.findViewById(R.id.desc);
