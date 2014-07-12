@@ -69,25 +69,38 @@ public class AppListFragment extends ListFragment {
 			String title = (String) entries.get(0);
 			String desc = (String) entries.get(1);
 			String url = (String) entries.get(2);
+            String guid = (String) entries.get(3);
+            String pubDate = (String) entries.get(4);
 
+            // title
 			TextView tv = (TextView) convertView.findViewById(R.id.title);
 			tv.setText(title);
 
+            // url
 			tv = (TextView) convertView.findViewById(R.id.url);
 			tv.setText(url);
 
-			tv = (TextView) convertView.findViewById(R.id.sub);
+            // pubDate
+            tv = (TextView) convertView.findViewById(R.id.pubDate);
+            tv.setText(pubDate);
+
+            //guid
+            tv = (TextView) convertView.findViewById(R.id.guid);
+            tv.setText(guid);
+
+            // desc
+            tv = (TextView) convertView.findViewById(R.id.desc);
             desc = desc.replaceAll("\r\n|\r|\n", "");
             desc = stripTags(desc, "someTag");
-            //android.util.Log.i("tagFoo",  "after  : " + desc.length());
-
             if(desc.length() >= 100){
                 desc = desc.substring(0, 100) + " ... ";
             }
+//            android.util.Log.i("app",  "desc : " + desc);
 			tv.setText(desc);
 
-			//            ImageView iv = (ImageView) convertView.findViewById(R.id.icon);
-			//            iv.setImageDrawable(info.applicationInfo.loadIcon(packageManager));
+//            icon
+//            ImageView iv = (ImageView) convertView.findViewById(R.id.icon);
+//            iv.setImageDrawable(info.applicationInfo.loadIcon(packageManager));
 
 			return convertView;
 		}
@@ -128,8 +141,7 @@ public class AppListFragment extends ListFragment {
 	// Implementation of AsyncTask used to download XML feed from stackoverflow.com.
 	private class DownloadXmlTask extends AsyncTask<String, Void, List> {
 
-		// TODO:ここよく分かっていないのでちゃんと読め
-		// see... http://developer.android.com/reference/android/os/AsyncTask.html
+		// TODO:see http://developer.android.com/reference/android/os/AsyncTask.html
 		protected List doInBackground(String... urls) {
 			try {
 				return loadXmlFromNetwork(urls[0]);
@@ -146,19 +158,26 @@ public class AppListFragment extends ListFragment {
 		@Override
 		protected void onPostExecute(List result) {
 
-
 			CardListAdapter adapter = new CardListAdapter(getActivity());
 			int size = result.size();
+//            android.util.Log.i("app",  "size : " + size);
 			for(int i=0; i<size; i++){
 				Entry entry = (Entry)result.get(i);
 				final String title = getTitleByEntry(entry);
                 final String desc  = getDescriptionByEntry(entry);
 				final String url   = getUrlByEntry(entry);
+                final String guid   = getGuidByEntry(entry);
+                final String pubDate   = getPubDateByEntry(entry);
 
 				List entries = new ArrayList();
 				entries.add(title);
 				entries.add(desc);
 				entries.add(url);
+                entries.add(guid);
+                entries.add(pubDate);
+
+//                android.util.Log.i("app",  "guid    : " + guid);
+//                android.util.Log.i("app",  "pubDate : " + pubDate);
 
 				adapter.add(entries);
 			}
@@ -254,6 +273,24 @@ public class AppListFragment extends ListFragment {
         } catch (Exception e) {
             // TODO:
             return "(No URL)";
+        }
+    }
+
+    private String getGuidByEntry(Entry entry) {
+        try {
+            return entry.guid;
+        } catch (Exception e) {
+            // TODO:
+            return "(No Guid)";
+        }
+    }
+
+    private String getPubDateByEntry(Entry entry) {
+        try {
+            return entry.pubDate;
+        } catch (Exception e) {
+            // TODO:
+            return "(No PubDate)";
         }
     }
 } // public class AppListFragment extends ListFragment

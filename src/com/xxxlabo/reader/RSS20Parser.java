@@ -77,63 +77,86 @@ public class RSS20Parser {
 		String entryTitle = null;
 		String entryDescription = null;
 		String entryLink = null;
+        String entryGuid = null;
+        String entryPubDate = null;
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
 			String name = parser.getName();
+//            android.util.Log.i("parser",  "name : " + name);
 			if (name.equals("title")) {
 				entryTitle = readTitle(parser);
 			} else if (name.equals("description")) {
 				entryDescription = readDescription(parser);
-			} else if (name.equals("link")) {
-				entryLink = readLink(parser);
+            } else if (name.equals("link")) {
+                entryLink = readLink(parser);
+            } else if (name.equals("guid")) {
+                entryGuid = readGuid(parser);
+            } else if (name.equals("pubDate")) {
+                entryPubDate = readPubDate(parser);
 			} else {
 				skip(parser);
 			}
 		}
-		Entry entry = new Entry(entryTitle, entryDescription, entryLink);
+		Entry entry = new Entry(entryTitle, entryDescription, entryLink, entryGuid, entryPubDate);
 		return entry;
 	}
 	
 	// Processes title tags in the feed.
 	private String readTitle(XmlPullParser parser) throws IOException, XmlPullParserException {
 		parser.require(XmlPullParser.START_TAG, ns, "title");
-		String title = readText(parser);
+		String val = readText(parser);
 		parser.require(XmlPullParser.END_TAG, ns, "title");
-		return title;
+		return val;
 	}
 
 	// Processes link tags in the feed.
 	private String readLink(XmlPullParser parser) throws IOException, XmlPullParserException {
-		// TODO:hrefとか取得したいときはこう。
-		//		String link = "";
+//		TODO:hrefとか取得したいときはこう。
+//	    String link = "";
 //		parser.require(XmlPullParser.START_TAG, ns, "link");
 //		String tag = parser.getName();
-//		String relType = parser.getAttributeValue(null, "rel");  
+//		String relType = parser.getAttributeValue(null, "rel");
 //		if (tag.equals("link")) {
 //			if (relType.equals("alternate")){
 //				link = parser.getAttributeValue(null, "href");
 //				parser.nextTag();
-//			} 
+//			}
 //		}
 //		parser.require(XmlPullParser.END_TAG, ns, "link");
 //		return link;
 		parser.require(XmlPullParser.START_TAG, ns, "link");
-		String link = readText(parser);
+		String val = readText(parser);
 		parser.require(XmlPullParser.END_TAG, ns, "link");
-		return link;
+		return val;
 	}
 
-	// Processes summary tags in the feed.
-	private String readDescription(XmlPullParser parser) throws IOException, XmlPullParserException {
-		parser.require(XmlPullParser.START_TAG, ns, "description");
-		String description = readText(parser);
-		parser.require(XmlPullParser.END_TAG, ns, "description");
-		return description;
-	}
+    // Processes summary tags in the feed.
+    private String readDescription(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, ns, "description");
+        String val = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "description");
+        return val;
+    }
 
-	// For the tags title and summary, extracts their text values.
+    // Processes summary tags in the feed.
+    private String readGuid(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, ns, "guid");
+        String val = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "guid");
+        return val;
+    }
+
+    // Processes summary tags in the feed.
+    private String readPubDate(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, ns, "pubDate");
+        String val = readText(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "pubDate");
+        return val;
+    }
+
+    // For the tags title and summary, extracts their text values.
 	private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
 		String result = "";
 		if (parser.next() == XmlPullParser.TEXT) {
@@ -165,11 +188,15 @@ public class RSS20Parser {
 		public final String title;
 		public final String link;
 		public final String description;
+        public final String guid;
+        public final String pubDate;
 
-		private Blog(String title, String description, String link) {
+		private Blog(String title, String description, String link, String guid, String pubDate) {
 			this.title = title;
 			this.description = description;
 			this.link = link;
+            this.guid = guid;
+            this.pubDate = pubDate;
 		}
 	}
 	
@@ -178,13 +205,15 @@ public class RSS20Parser {
 		public final String title;
 		public final String link;
 		public final String description;
+        public final String guid;
+        public final String pubDate;
 
-		private Entry(String title, String description, String link) {
+		private Entry(String title, String description, String link, String guid, String pubDate) {
 			this.title = title;
 			this.description = description;
 			this.link = link;
+            this.guid = guid;
+            this.pubDate = pubDate;
 		}
 	}
-
-	
 }

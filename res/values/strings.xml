@@ -21,6 +21,6 @@
 
     <!-- NG. can not start. -->
     <!--<string name="blog_name">yuki777s blog.</string>-->
-    <!--<string name="feed_url">http://yuki777.tumblr.com/rss</string>-->
-    <string name="feed_url">http://xxxlabo.com/feed/yuki777.tumblr.com/rss</string>
+    <string name="feed_url">http://yuki777.tumblr.com/rss</string>
+    <!--<string name="feed_url">http://xxxlabo.com/feed/yuki777.tumblr.com/rss</string>-->
 </resources>
