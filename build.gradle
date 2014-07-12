@@ -39,4 +39,18 @@ android {
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
     }
+
+    signingConfigs {
+        release {
+            storeFile file("/Users/yuki/Dropbox/KEY/androidApps/reader/key.jks")
+            storePassword "pass10n"
+            keyAlias "thekey"
+            keyPassword "pass10n"
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
 }
