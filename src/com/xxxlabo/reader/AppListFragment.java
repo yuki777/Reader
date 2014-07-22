@@ -21,22 +21,24 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
-
 import com.xxxlabo.reader.RSS20Parser.Entry;
 
+import nl.matshofman.saxrssreader.*;
 
 public class AppListFragment extends ListFragment {
 
@@ -46,7 +48,6 @@ public class AppListFragment extends ListFragment {
 
 		String title = getString(R.string.blog_name);
 		String url = getString(R.string.feed_url);
-
 		new DownloadXmlTask().execute(url);
 	}
 
@@ -65,7 +66,7 @@ public class AppListFragment extends ListFragment {
 				convertView = mInflater.inflate(R.layout.list_item_card, parent, false);
 			}
 
-			List entries = (List) getItem(position);
+            List entries = (List) getItem(position);
 			String title = (String) entries.get(0);
 			String desc = (String) entries.get(1);
 			String url = (String) entries.get(2);
@@ -133,8 +134,6 @@ public class AppListFragment extends ListFragment {
                 return text;
             }
         }
-
-
     }
 
 
@@ -144,7 +143,7 @@ public class AppListFragment extends ListFragment {
 		// TODO:see http://developer.android.com/reference/android/os/AsyncTask.html
 		protected List doInBackground(String... urls) {
 			try {
-				return loadXmlFromNetwork(urls[0]);
+				return (ArrayList) loadXmlFromNetwork(urls[0]);
 			} catch (IOException e) {
 				//return getResources().getString(R.string.connection_error);
 			} catch (XmlPullParserException e) {
@@ -155,34 +154,22 @@ public class AppListFragment extends ListFragment {
 			return null;
 		}
 
-		@Override
-		protected void onPostExecute(List result) {
-
+        protected void onPostExecute(List result) {
 			CardListAdapter adapter = new CardListAdapter(getActivity());
-			int size = result.size();
-//            android.util.Log.i("app",  "size : " + size);
-			for(int i=0; i<size; i++){
-				Entry entry = (Entry)result.get(i);
-				final String title = getTitleByEntry(entry);
-                final String desc  = getDescriptionByEntry(entry);
-				final String url   = getUrlByEntry(entry);
-                final String guid   = getGuidByEntry(entry);
-                final String pubDate   = getPubDateByEntry(entry);
-
+            int size = result.size();
+            for(int i=0; i<size; i++){
+		        Entry entry = (Entry)result.get(i);
 				List entries = new ArrayList();
-				entries.add(title);
-				entries.add(desc);
-				entries.add(url);
-                entries.add(guid);
-                entries.add(pubDate);
-
-//                android.util.Log.i("app",  "guid    : " + guid);
-//                android.util.Log.i("app",  "pubDate : " + pubDate);
+				entries.add(entry.title);
+                entries.add(entry.description);
+                entries.add(entry.link);
+                entries.add(entry.guid);
+                entries.add(entry.pubDate);
 
 				adapter.add(entries);
 			}
 
-			int padding = (int) (getResources().getDisplayMetrics().density * 8); // 8dip
+            int padding = (int) (getResources().getDisplayMetrics().density * 8); // 8dip
 			ListView listView = getListView();
 			listView.setPadding(padding, 0, padding, 0);
 			listView.setScrollBarStyle(ListView.SCROLLBARS_OUTSIDE_OVERLAY);
@@ -197,6 +184,7 @@ public class AppListFragment extends ListFragment {
 			listView.setOnItemClickListener(new OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    android.util.Log.i("logapp", "6");
 //					// open webview in new browser 
 //                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
 //                    startActivity(browserIntent);
@@ -217,80 +205,39 @@ public class AppListFragment extends ListFragment {
 
 		// Uploads XML from stackoverflow.com, parses it, and combines it with
 		// HTML markup. Returns HTML string.
-		private List loadXmlFromNetwork(String urlString) throws XmlPullParserException, IOException {
-			InputStream stream = null;
-			// Instantiate the parser
-			RSS20Parser exciteBlogXMLParser = new RSS20Parser();
-			List<Entry> entries = null;
-			try {
-				stream = downloadUrl(urlString);
-				entries = exciteBlogXMLParser.parse(stream);
-				// Makes sure that the InputStream is closed after the app is
-				// finished using it.
-			} finally {
-				if (stream != null) {
-					stream.close();
-				} 
-			}
+		private List<Entry> loadXmlFromNetwork(String urlString) throws XmlPullParserException, IOException {
+            List<Entry> entries = null;
+            try {
+                RssFeed feed = RssReader.read(new URL(urlString));
+                entries = normalize(feed);
+            } catch (SAXException e) {
+                e.printStackTrace();
+            }
 
 			return entries;
 		}
 
-		// Given a string representation of a URL, sets up a connection and gets
-		// an input stream.
-		private InputStream downloadUrl(String urlString) throws IOException {
-			URL url = new URL(urlString);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setReadTimeout(10000 /* milliseconds */);
-			conn.setConnectTimeout(15000 /* milliseconds */);
-			conn.setRequestMethod("GET");
-			conn.setDoInput(true);
-			// Starts the query
-			conn.connect();
-			return conn.getInputStream();
-		}
-	} // private class DownloadXmlTask extends AsyncTask<String, Void, List>
+        private List<Entry> normalize(RssFeed feed) throws IOException, XmlPullParserException {
+            List entries = new ArrayList();
+            ArrayList<RssItem> rssItems = feed.getRssItems();
 
-    private String getTitleByEntry(Entry entry) {
-        try {
-            return entry.title;
-        } catch (Exception e) {
-            return "(No Title)";
-        }
-    }
+            for(RssItem rssItem : rssItems) {
+                Entry entry = readItem(rssItem);
+                entries.add(entry);
+            }
 
-    private String getDescriptionByEntry(Entry entry) {
-        try {
-            return Html.fromHtml(entry.description.toString()).toString();
-        } catch (Exception e) {
-            return "(No Description)";
+            return entries;
         }
-    }
 
-    private String getUrlByEntry(Entry entry) {
-        try {
-            return entry.link;
-        } catch (Exception e) {
-            // TODO:
-            return "(No URL)";
-        }
-    }
+        private Entry readItem(RssItem rssItem) throws XmlPullParserException, IOException {
+            String entryTitle = rssItem.getTitle();
+            String entryDescription = rssItem.getDescription();
+            String entryLink = rssItem.getLink();
+            String entryGuid = rssItem.getLink();
+            String entryPubDate = rssItem.getPubDate().toString();
+            Entry entry = new Entry(entryTitle, entryDescription, entryLink, entryGuid, entryPubDate);
 
-    private String getGuidByEntry(Entry entry) {
-        try {
-            return entry.guid;
-        } catch (Exception e) {
-            // TODO:
-            return "(No Guid)";
+            return entry;
         }
-    }
-
-    private String getPubDateByEntry(Entry entry) {
-        try {
-            return entry.pubDate;
-        } catch (Exception e) {
-            // TODO:
-            return "(No PubDate)";
-        }
-    }
+    } // private class DownloadXmlTask extends AsyncTask<String, Void, List>
 } // public class AppListFragment extends ListFragment

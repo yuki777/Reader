@@ -60,7 +60,7 @@ public class RSS20Parser {
 			}
 			String name = parser.getName();
 			if(name.equals("item")){
-				entries.add(readItem(parser));
+            entries.add(readItem(parser));
 			} else {
 				skip(parser);
 			}
@@ -208,7 +208,7 @@ public class RSS20Parser {
         public final String guid;
         public final String pubDate;
 
-		private Entry(String title, String description, String link, String guid, String pubDate) {
+		public Entry(String title, String description, String link, String guid, String pubDate) {
 			this.title = title;
 			this.description = description;
 			this.link = link;
