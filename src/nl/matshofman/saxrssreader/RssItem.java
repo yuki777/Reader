@@ -41,6 +41,7 @@ public class RssItem implements Comparable<RssItem>, Parcelable {
 	public RssItem(Parcel source) {
 		
 		Bundle data = source.readBundle();
+        android.util.Log.i("rssitem", data.toString());
 		title = data.getString("title");
 		link = data.getString("link");
 		pubDate = (Date) data.getSerializable("pubDate");

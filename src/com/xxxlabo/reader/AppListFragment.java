@@ -233,7 +233,7 @@ public class AppListFragment extends ListFragment {
             String entryTitle = rssItem.getTitle();
             String entryDescription = rssItem.getDescription();
             String entryLink = rssItem.getLink();
-            String entryGuid = rssItem.getLink();
+            String entryGuid = "";
             String entryPubDate = rssItem.getPubDate().toString();
             Entry entry = new Entry(entryTitle, entryDescription, entryLink, entryGuid, entryPubDate);
 

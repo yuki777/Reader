@@ -23,22 +23,15 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="rssitem" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.xxxlabo.reader" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1f404ea-7776-4d77-bacc-492352155565" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/android-rome-feed-reader-1.0.0-r2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/nl/matshofman/saxrssreader/RssFeed.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/nl/matshofman/saxrssreader/RssHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/nl/matshofman/saxrssreader/RssItem.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/nl/matshofman/saxrssreader/RssReader.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/android_rome_feed_reader_1_0_0_r2.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/xxxlabo/reader/AppListFragment.java" afterPath="$PROJECT_DIR$/src/com/xxxlabo/reader/AppListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/xxxlabo/reader/RSS20Parser.java" afterPath="$PROJECT_DIR$/src/com/xxxlabo/reader/RSS20Parser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/nl/matshofman/saxrssreader/RssItem.java" afterPath="$PROJECT_DIR$/src/nl/matshofman/saxrssreader/RssItem.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle-app.setting" afterPath="$PROJECT_DIR$/gradle-app.setting" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reader-base.iml" afterPath="$PROJECT_DIR$/reader-base.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="reader-base.iws" />
@@ -62,13 +55,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="AppListFragment.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AppListFragment.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/xxxlabo/reader/AppListFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.307693" vertical-offset="2969" max-vertical-offset="3735">
-              <caret line="221" column="29" selection-start-line="221" selection-start-column="22" selection-end-line="221" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.4856115" vertical-offset="1005" max-vertical-offset="3735">
+              <caret line="85" column="32" selection-start-line="85" selection-start-column="32" selection-end-line="85" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1412#1441#0" expanded="true" />
+                <element signature="e#1458#1486#0" expanded="true" />
                 <element signature="e#6052#6948#0" expanded="true" />
                 <element signature="e#6942#6943#0" expanded="true" />
               </folding>
@@ -76,23 +71,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RssItem.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/nl/matshofman/saxrssreader/RssItem.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1620">
-              <caret line="16" column="34" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.36082473" vertical-offset="0" max-vertical-offset="582">
-              <caret line="14" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+              <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -536,7 +519,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="1405761942000" />
+        <entry key="$PROJECT_DIR$" value="1406271950000" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -691,12 +674,13 @@
       <list>
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/res/layout/list_item_card.xml" />
         <option value="$PROJECT_DIR$/src/nl/matshofman/saxrssreader/RssFeed.java" />
         <option value="$PROJECT_DIR$/src/com/xxxlabo/reader/RSS20Parser.java" />
-        <option value="$PROJECT_DIR$/src/com/xxxlabo/reader/AppListFragment.java" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/src/nl/matshofman/saxrssreader/RssItem.java" />
+        <option value="$PROJECT_DIR$/src/com/xxxlabo/reader/AppListFragment.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
       </list>
     </option>
   </component>
@@ -796,10 +780,6 @@
               <option name="myItemId" value="External Libraries" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; Android API 19 Platform &gt;" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -808,74 +788,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="reader-base" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="reader-base" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="reader-base" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="saxrssreader" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="reader-base" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="reader-base" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="reader" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="reader-base" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="reader-base" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="reader-base" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="reader-base" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1475,13 +1387,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="930">
-          <caret line="15" column="14" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/list_header_footer.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.1111112" vertical-offset="0" max-vertical-offset="150">
@@ -1530,33 +1435,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xxxlabo/reader/AppListFragment.java">
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.307693" vertical-offset="2969" max-vertical-offset="3735">
-          <caret line="221" column="29" selection-start-line="221" selection-start-column="22" selection-end-line="221" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#6052#6948#0" expanded="true" />
-            <element signature="e#6942#6943#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+          <caret line="6" column="28" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/nl/matshofman/saxrssreader/RssItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1620">
-          <caret line="16" column="34" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="1695">
+          <caret line="43" column="55" selection-start-line="43" selection-start-column="55" selection-end-line="43" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2902#2903#0" expanded="true" />
+            <element signature="e#2927#2928#0" expanded="true" />
+            <element signature="e#3046#3047#0" expanded="true" />
+            <element signature="e#3067#3068#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+    <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36082473" vertical-offset="0" max-vertical-offset="582">
-          <caret line="14" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.41237113" vertical-offset="0" max-vertical-offset="930">
+          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xxxlabo/reader/AppListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4856115" vertical-offset="1005" max-vertical-offset="3735">
+          <caret line="85" column="32" selection-start-line="85" selection-start-column="32" selection-end-line="85" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1412#1441#0" expanded="true" />
+            <element signature="e#1458#1486#0" expanded="true" />
+            <element signature="e#6052#6948#0" expanded="true" />
+            <element signature="e#6942#6943#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
