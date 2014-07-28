@@ -1,0 +1,16 @@
+#!/bin/bash
+if [ "$1" == "" ]; then
+    echo "$0 <blog_name> <feed_url>"
+    exit
+fi
+if [ "$2" == "" ]; then
+    echo "$0 <blog_name> <feed_url>"
+    exit
+fi
+xml_header='<?xml version="1.0" encoding="utf-8"?> <resources> <string name="action_settings">Settings</string>'
+xml_blog_name="<string name=\"blog_name\">$1</string>"
+xml_feed_url="<string name=\"feed_url\">$2</string>"
+xml_footer='</resources>'
+
+xml=$xml_header$xml_blog_name$xml_feed_url$xml_footer
+echo $xml > ~/src/reader-base/res/values/strings.xml
